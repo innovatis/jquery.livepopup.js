@@ -6,7 +6,7 @@
       shouldCacheAjax = button.is('[data-cache-ajax]');
 
     if(! popup){
-      popup = $("<div class='exo-popup'>" + popupContent + "</div>").hide();
+      popup = $(popupContent).hide();
       popup.insertAfter(button);
       button.data( "popupElement", popup );
     }
@@ -14,17 +14,40 @@
   }
 
   function togglePopup(popup, button){
-    var closesOnClick = button.is("[data-close-on-click]");
+    var closesOnClick = popup.is('[data-close-on-click]'),
+      closesOnClickSelector = popup.data('closeOnClick'),
+      closesOnExternalClick = popup.is('[data-close-on-external-click]');
+
+    //this one needs to get rebound every time
+    if(closesOnExternalClick){
+      $("body").one('click', function(e){
+        console.log("Body clicked");
+        console.log("e.target", e.target);
+        window.popup = popup;
+        window.target = e.target;
+        if( popup.find($(e.target)).length === 0){
+          popup.hide();
+        }
+      });
+    }
+
     if( button.data('popup') !== 'initialized'){
       button.data('popup', 'initialized');
 
-      button.exoPositionRelative(popup, {top: 20});
-
+      button.exoPositionRelative(popup);
 
       if(closesOnClick){
-        popup.click( function(){
-          popup.toggle();
-        });
+        if(closesOnClickSelector){
+          popup
+            .find(closesOnClickSelector)
+            .click(function(){
+              popup.toggle();
+          });
+        } else {
+          popup.click(function(){
+            popup.toggle();
+          });
+        }
       }
     }
     popup.toggle();
@@ -64,8 +87,10 @@
   $.fn.exoPositionRelative = function(child, opts){
     var parent   = this,
       options    = opts || {},
-      offsetTop  = options.top  || 0,
-      offsetLeft = options.left || 0;
+      childTop   = child.data("popupTop"),
+      childLeft  = child.data("popupLeft"),
+      offsetTop  = childTop  || options.top  || 0,
+      offsetLeft = childLeft || options.left || 0;
 
 
     $(window).resize( function(e){
@@ -82,6 +107,6 @@
 })(jQuery);
 
 $(function(){
-  $("[data-popup]").exoPopup();
+  $("[data-popup-trigger]").exoPopup();
 });
 
