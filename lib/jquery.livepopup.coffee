@@ -2,13 +2,13 @@
 
   postHandler = (data, button) ->
     popupContent = data
-    popup           = button.data("popupElement")
+    popup           = button.data('popupElement')
     shouldCacheAjax = button.is('[data-cache-ajax]')
 
     unless popup
       popup = $(popupContent).hide()
       popup.insertAfter(button)
-      button.data( "popupElement", popup )
+      button.data( 'popupElement', popup )
     togglePopup(popup, button)
 
   togglePopup = (popup, button) ->
@@ -19,7 +19,7 @@
 
     #this one needs to get rebound every time
     if closesOnExternalClick
-      $("body").one 'click', (e) ->
+      $('body').one 'click', (e) ->
         if popup.find($(e.target)).length is 0
           popup.hide()
 
@@ -40,15 +40,15 @@
   actsAsPopup = (e) ->
     e.preventDefault()
     button    = $(e.target)
-    href      = button.attr("href")
+    href      = button.attr('href')
     element   = button.data('popupElement')
-    isAjax    = (href[0] isnt "#")
+    isAjax    = (href[0] isnt '#')
     ajaxIsntCached     = !element
-    ajaxIsCacheable    = button.is("[data-cache-ajax]")
+    ajaxIsCacheable    = button.is('[data-cache-ajax]')
     shouldMakeAjaxCall = (ajaxIsntCached or !ajaxIsCacheable)
 
     unless href
-      throw "[actsAsPopup]: href is empty"
+      throw '[actsAsPopup]: href is empty'
 
     if isAjax and shouldMakeAjaxCall
       $.get href, (data) -> postHandler(data, button)
@@ -60,8 +60,8 @@
   $.fn.exoPositionRelative = (child, opts) ->
     parent     = this
     options    = opts || {}
-    childTop   = child.data("popupTop")
-    childLeft  = child.data("popupLeft")
+    childTop   = child.data('popupTop')
+    childLeft  = child.data('popupLeft')
     offsetTop  = childTop  || options.top  || 0
     offsetLeft = childLeft || options.left || 0
 
@@ -76,6 +76,6 @@
 
     $(window).trigger('resize')
 
-  $ -> $("[data-popup-trigger]").exoPopup()
+  $ -> $('[data-popup-trigger]').exoPopup()
 
 )(jQuery)
