@@ -1,6 +1,6 @@
 directory 'output'
 task 'compile'  => 'output' do
-  sh 'coffee -o output -c lib/jquery.livepopup.coffee'
+  sh 'coffee --bare -o output -c lib/jquery.livepopup.coffee'
 end
 
 task 'clean' do
