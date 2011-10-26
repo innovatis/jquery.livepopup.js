@@ -12,14 +12,14 @@
   </head>
   <body>
     <div class="buttons">
-      <a data-popup data-close-on-click href="#exo-popup">Click me</a>
-      <a data-popup                     href="#exo-popup2">Click me</a>
+      <a data-popup-trigger  href="#exo-popup">Click me</a>
+      <a data-popup-trigger                     href="#exo-popup2">Click me</a>
 
-      <a data-popup data-cache-ajax href="/popup.html">Click for Ajax</a>
-      <a data-popup                 href="/popup.html">Click for Ajax</a>
+      <a data-popup-trigger data-cache-ajax href="/popup.html">Click for Ajax</a>
+      <a data-popup-trigger                 href="/popup.html">Click for Ajax</a>
     </div>
 
-    <div class= "exo-popup" id="exo-popup">
+    <div data-close-on-click class= "exo-popup" id="exo-popup" data-popup-top="20">
       <div class="exo-popup-header">
       </div>
       <div class="exo-popup-body">
@@ -28,7 +28,7 @@
       <div class="exo-popup-footer">
       </div>
     </div>
-    <div class= "exo-popup" id="exo-popup2" style="display:none;">
+    <div class= "exo-popup" id="exo-popup2" style="display:none;" data-popup-top="20">
       <div class="exo-popup-header">
       </div>
       <div class="exo-popup-body">

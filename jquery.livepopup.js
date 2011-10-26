@@ -18,13 +18,10 @@
       closesOnClickSelector = popup.data('closeOnClick'),
       closesOnExternalClick = popup.is('[data-close-on-external-click]');
 
+
     //this one needs to get rebound every time
     if(closesOnExternalClick){
       $("body").one('click', function(e){
-        console.log("Body clicked");
-        console.log("e.target", e.target);
-        window.popup = popup;
-        window.target = e.target;
         if( popup.find($(e.target)).length === 0){
           popup.hide();
         }
@@ -37,6 +34,7 @@
       button.exoPositionRelative(popup);
 
       if(closesOnClick){
+        console.log("Closes on click");
         if(closesOnClickSelector){
           popup
             .find(closesOnClickSelector)
@@ -80,7 +78,6 @@
 
   $.fn.exoPopup = function(){
     this.live('click', actsAsPopup);
-
   };
 
 
