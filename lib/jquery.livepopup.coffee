@@ -76,8 +76,8 @@
     options    = opts || {}
     childTop   = child.data('popupTop')  or parent.data( 'popupTop'  )
     childLeft  = child.data('popupLeft') or parent.data( 'popupLeft' )
-    offsetTop  = childTop  || options.top  || 0
-    offsetLeft = childLeft || options.left || 0
+    offsetTop  = options.top  || childTop  ||  0
+    offsetLeft = options.left || childLeft ||  0
 
     $(window).resize (e) ->
       offset = parent.offset()
