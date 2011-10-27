@@ -51,7 +51,12 @@
       throw '[actsAsPopup]: href is empty'
 
     if isAjax and shouldMakeAjaxCall
-      $.get href, (data) -> postHandler(data, button)
+      ajaxSpinner = $("<div class='spinner'></div>")
+      button.after(ajaxSpinner)
+      button.exoPositionRelative(ajaxSpinner, {left: 10})
+      $.get href, (data) ->
+        ajaxSpinner.remove()
+        postHandler(data, button)
     else
       popup = element or $(href)
       togglePopup(popup, button)

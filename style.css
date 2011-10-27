@@ -63,3 +63,11 @@ html{
    margin: 0 auto;
    width: 350px;
 }
+
+
+.spinner{
+   position: absolute;
+   background: url("ajax-loader.gif") center no-repeat;
+   width: 16px;
+   height: 16px;
+}
