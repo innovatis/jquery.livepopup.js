@@ -6,7 +6,14 @@
     shouldCacheAjax = button.is('[data-cache-ajax]')
 
     unless popup
-      popup = $(popupContent).hide()
+      popup = $(popupContent)  #.hide()
+      #wrap popup in .exo-popup if it isn't already
+      unless popup.is('.exo-popup')
+        # have to do it this way because popup.wrap() does not return a reference to the wrapping html
+        # and since this isn't written to the dom yet, wrap() ends up doing nothing
+        popup = $("<div class='exo-popup'></div>").html(popup)
+
+      popup.hide()
       popup.insertAfter(button)
       button.data( 'popupElement', popup )
     togglePopup(popup, button)
