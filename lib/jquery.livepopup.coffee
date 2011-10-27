@@ -62,7 +62,7 @@
     if isAjax and shouldMakeAjaxCall
       ajaxSpinner = $("<div class='spinner'></div>")
       button.after(ajaxSpinner)
-      button.exoPositionRelative(ajaxSpinner, {left: 10})
+      button.exoPositionRelative(ajaxSpinner, {left: 10, top: 0})
       $.get href, (data) ->
         ajaxSpinner.remove()
         postHandler(data, button)
