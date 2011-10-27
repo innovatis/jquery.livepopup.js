@@ -12,9 +12,9 @@
     togglePopup(popup, button)
 
   togglePopup = (popup, button) ->
-    closesOnClick = popup.is('[data-close-on-click]')
-    closesOnClickSelector = popup.data('closeOnClick')
-    closesOnExternalClick = popup.is('[data-close-on-external-click]')
+    closesOnClick = popup.is('[data-close-on-click]')                  or button.is('[data-close-on-click]')
+    closesOnClickSelector = popup.data('closeOnClick')                 or button.data('closeOnClick')
+    closesOnExternalClick = popup.is('[data-close-on-external-click]') or button.is('[data-close-on-external-click]')
 
 
     #this one needs to get rebound every time
@@ -65,8 +65,8 @@
   $.fn.exoPositionRelative = (child, opts) ->
     parent     = this
     options    = opts || {}
-    childTop   = child.data('popupTop')
-    childLeft  = child.data('popupLeft')
+    childTop   = child.data('popupTop')  or parent.data( 'popupTop'  )
+    childLeft  = child.data('popupLeft') or parent.data( 'popupLeft' )
     offsetTop  = childTop  || options.top  || 0
     offsetLeft = childLeft || options.left || 0
 
