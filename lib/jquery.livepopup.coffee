@@ -1,9 +1,10 @@
 (($) ->
 
   postHandler = (data, button) ->
-    popupContent = data
+    popupContent    = data
     popup           = button.data('popupElement')
     shouldCacheAjax = button.is('[data-cache-ajax]')
+    wrapperClass    = button.data('wrapperClass')
 
     unless popup
       popup = $(popupContent)  #.hide()
@@ -14,6 +15,7 @@
         popup = $("<div class='exo-popup'></div>").html(popup)
 
       popup.hide()
+      popup.addClass(wrapperClass) if wrapperClass
       popup.insertAfter(button)
       button.data( 'popupElement', popup )
     togglePopup(popup, button)
