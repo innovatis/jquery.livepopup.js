@@ -1,0 +1,22 @@
+{
+  "name": "jquery.livepopup",
+  "bpm": "1.0.0",
+  "bpm:build": {
+    "bpm_libs.js": {
+      "files": [
+        "lib"
+      ],
+      "minifier": "uglify-js"
+    },
+    "bpm_styles.css": {
+      "files": [
+
+      ]
+    }
+  },
+  "dependencies": {
+    "coffee-script": ">= 0",
+    "jquery": ">= 0",
+    "spade": ">= 0"
+  }
+}
