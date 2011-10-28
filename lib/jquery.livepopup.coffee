@@ -73,11 +73,11 @@
   $.fn.exoPopup = -> this.live('click', actsAsPopup)
   $.fn.exoPositionRelative = (child, opts) ->
     parent     = this
-    options    = opts || {}
-    childTop   = child.data('popupTop')  or parent.data( 'popupTop'  )
-    childLeft  = child.data('popupLeft') or parent.data( 'popupLeft' )
-    offsetTop  = options.top  || childTop  || 0
-    offsetLeft = options.left || childLeft || 0
+    options    = opts or {}
+    topFromParent   = child.data('popupTop')  or parent.data( 'popupTop'  )
+    leftFromParent  = child.data('popupLeft') or parent.data( 'popupLeft' )
+    offsetTop  = options.top  or topFromParent  or 0
+    offsetLeft = options.left or leftFromParent or 0
 
     offsetTop  = 0 if options.top  is "none"
     offsetLeft = 0 if options.left is "none"
