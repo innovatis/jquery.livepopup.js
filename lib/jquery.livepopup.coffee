@@ -76,15 +76,15 @@
     options    = opts || {}
     childTop   = child.data('popupTop')  or parent.data( 'popupTop'  )
     childLeft  = child.data('popupLeft') or parent.data( 'popupLeft' )
-    offsetTop  = if options.top || options.top is 0
+    offsetTop  = if options.top or options.top is 0
                    options.top
-                 else if childTop || childTop is 0
+                 else if childTop or childTop is 0
                    childTop
                  else
                    0
-    offsetLeft  = if options.top || options.top is 0
+    offsetLeft  = if options.top or options.top is 0
                    options.top
-                 else if childTop || childTop is 0
+                 else if childTop or childTop is 0
                    childTop
                  else
                    0
