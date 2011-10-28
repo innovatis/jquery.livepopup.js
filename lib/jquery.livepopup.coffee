@@ -76,14 +76,23 @@
     options    = opts || {}
     childTop   = child.data('popupTop')  or parent.data( 'popupTop'  )
     childLeft  = child.data('popupLeft') or parent.data( 'popupLeft' )
-    offsetTop  = options.top  || childTop  ||  0
-    offsetLeft = options.left || childLeft ||  0
+    offsetTop  = if options.top || options.top is 0
+                   options.top
+                 else if childTop || childTop is 0
+                   childTop
+                 else
+                   0
+    offsetLeft  = if options.top || options.top is 0
+                   options.top
+                 else if childTop || childTop is 0
+                   childTop
+                 else
+                   0
 
     $(window).resize (e) ->
       offset = parent.offset()
       top    = offset.top + offsetTop
       left   = offset.left + offsetLeft
-
       child.css
         left: left
         top: top
