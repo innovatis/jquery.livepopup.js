@@ -62,7 +62,7 @@
     if isAjax and shouldMakeAjaxCall
       ajaxSpinner = $("<div class='spinner'></div>")
       button.after(ajaxSpinner)
-      button.exoPositionRelative(ajaxSpinner, {left: 10, top: 0})
+      button.exoPositionRelative(ajaxSpinner, {left: 10, top: "none"})
       $.get href, (data) ->
         ajaxSpinner.remove()
         postHandler(data, button)
@@ -76,18 +76,12 @@
     options    = opts || {}
     childTop   = child.data('popupTop')  or parent.data( 'popupTop'  )
     childLeft  = child.data('popupLeft') or parent.data( 'popupLeft' )
-    offsetTop  = if options.top || options.top is 0
-                   options.top
-                 else if childTop || childTop is 0
-                   childTop
-                 else
-                   0
-    offsetLeft  = if options.top || options.top is 0
-                   options.top
-                 else if childTop || childTop is 0
-                   childTop
-                 else
-                   0
+    offsetTop  = options.top  || childTop  || 0
+    offsetLeft = options.left || childLeft || 0
+
+    offsetTop  = 0 if options.top  is "none"
+    offsetLeft = 0 if options.left is "none"
+
 
     $(window).resize (e) ->
       offset = parent.offset()
