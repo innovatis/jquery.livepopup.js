@@ -82,7 +82,6 @@
     offsetTop  = 0 if options.top  is "none"
     offsetLeft = 0 if options.left is "none"
 
-
     $(window).resize (e) ->
       offset = parent.offset()
       top    = offset.top + offsetTop
