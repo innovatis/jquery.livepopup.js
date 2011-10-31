@@ -18,7 +18,13 @@
       popup.addClass(wrapperClass) if wrapperClass
       popup.insertAfter(button)
       button.data( 'popupElement', popup )
+
+      #trigger event hook on button
+      button.trigger( $.Event("popup:ajaxLoaded"), [popup])
+
     togglePopup(popup, button)
+
+
 
   togglePopup = (popup, button) ->
     closesOnClick = popup.is('[data-close-on-click]')                  or button.is('[data-close-on-click]')
@@ -92,6 +98,6 @@
 
     $(window).trigger('resize')
 
-  $ -> $('[data-popup-trigger]').exoPopup()
-
+  $ ->
+    $('[data-popup-trigger]').exoPopup()
 )(jQuery)
