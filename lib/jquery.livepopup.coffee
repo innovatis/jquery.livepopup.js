@@ -24,13 +24,10 @@
 
     togglePopup(popup, button)
 
-
-
   togglePopup = (popup, button) ->
     closesOnClick = popup.is('[data-close-on-click]')                  or button.is('[data-close-on-click]')
     closesOnClickSelector = popup.data('closeOnClick')                 or button.data('closeOnClick')
     closesOnExternalClick = popup.is('[data-close-on-external-click]') or button.is('[data-close-on-external-click]')
-
 
     #this one needs to get rebound every time
     if closesOnExternalClick
@@ -79,27 +76,5 @@
       togglePopup(popup, button)
 
   $.fn.exoPopup = -> this.live('click', actsAsPopup)
-  $.fn.exoPositionRelative = (child, opts) ->
-    parent     = this
-    options    = opts or {}
-    topFromParent   = child.data('popupTop')  or parent.data( 'popupTop'  )
-    leftFromParent  = child.data('popupLeft') or parent.data( 'popupLeft' )
-    offsetTop  = options.top  or topFromParent  or 0
-    offsetLeft = options.left or leftFromParent or 0
-
-    offsetTop  = 0 if options.top  is "none"
-    offsetLeft = 0 if options.left is "none"
-
-    $(window).resize (e) ->
-      offset = parent.offset()
-      top    = offset.top + offsetTop
-      left   = offset.left + offsetLeft
-      child.css
-        left: left
-        top: top
-
-    $(window).trigger('resize')
-
-  $ ->
-    $('[data-popup-trigger]').exoPopup()
+  $ -> $('[data-popup-trigger]').exoPopup()
 )(jQuery)

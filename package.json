@@ -17,6 +17,7 @@
   "dependencies": {
     "coffee-script": ">= 0",
     "jquery": ">= 0",
-    "spade": ">= 0"
+    "spade": ">= 0",
+    "jquery-position": ">= 0"
   }
 }

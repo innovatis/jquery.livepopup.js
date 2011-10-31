@@ -1,0 +1,3 @@
+[submodule "vendor/jquery-position"]
+	path = vendor/jquery-position
+	url = git@github.com:innovatis/jquery-position.git
