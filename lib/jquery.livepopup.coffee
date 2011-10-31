@@ -47,7 +47,9 @@
         if closesOnClickSelector
           popup
             .find(closesOnClickSelector)
-            .click -> popup.toggle()
+            .click (e) ->
+              e.preventDefault()
+              popup.toggle()
         else
           popup.click -> popup.toggle()
     popup.toggle()
