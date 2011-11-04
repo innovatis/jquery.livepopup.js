@@ -29,11 +29,18 @@
     closesOnClickSelector = popup.data('closeOnClick')                 or button.data('closeOnClick')
     closesOnExternalClick = popup.is('[data-close-on-external-click]') or button.is('[data-close-on-external-click]')
 
-    #this one needs to get rebound every time
+
+
+    #these ones need to get rebound every time
     if closesOnExternalClick
       $('body').one 'click', (e) ->
         if popup.find($(e.target)).length is 0
           popup.hide()
+
+    #do this one always
+    $('body').one 'keydown', (e) ->
+      if e.keyCode is 27 #code for escape
+        popup.hide()
 
     if  button.data('popup') isnt 'initialized'
       button.data('popup', 'initialized')
