@@ -68,9 +68,13 @@
       ajaxSpinner = $("<div class='spinner'></div>")
       button.after(ajaxSpinner)
       button.exoPositionRelative(ajaxSpinner, {left: 10, top: "none"})
-      $.get href, (data) ->
+      $.get(href, (data) ->
         ajaxSpinner.remove()
         postHandler(data, button)
+      ).error( ->
+        ajaxSpinner.remove()
+        alert("There was an error retrieving the popup")
+      )
     else
       popup = element or $(href)
       togglePopup(popup, button)

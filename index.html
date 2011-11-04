@@ -6,6 +6,11 @@
     <script>
       spade.require('jquery-livepopup');
     </script>
+    <style>
+      a{
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <div class="buttons">
@@ -19,6 +24,7 @@
       <a data-close-on-click data-popup-top="20" data-popup-trigger href="/popup2.html">Auto-wrap</a>
 
       <a data-wrapper-class="foo" data-close-on-click data-popup-top="20" data-popup-trigger href="/popup2.html">Should give wrapper class "foo"</a>
+      <a data-popup-trigger href="/not_a_real_file.html">Should fail</a>
     </div>
 
     <div data-close-on-click class= "exo-popup" id="exo-popup" data-popup-top="20">
