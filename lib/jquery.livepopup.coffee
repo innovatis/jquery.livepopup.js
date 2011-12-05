@@ -35,8 +35,8 @@
     if isNotAjax #then we do setup/teardown every time
       if button.data('popup') is 'initialized'
         button.data('popup', '')
-        #popup.disablePositionining() #somehow
-        popup.hide();
+        popup.data('position-object').disable()
+        popup.hide()
 
       else #if popup is not initialized
         #these ones need to get rebound every time
