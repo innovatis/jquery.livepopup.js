@@ -24,16 +24,16 @@
 
     togglePopup(popup, button)
 
-  togglePopup = (popup, button) ->
+  togglePopup = (popup, button, teardown) ->
     closesOnClick = popup.is('[data-close-on-click]')                  or button.is('[data-close-on-click]')
     closesOnClickSelector = popup.data('closeOnClick')                 or button.data('closeOnClick')
     closesOnExternalClick = popup.is('[data-close-on-external-click]') or button.is('[data-close-on-external-click]')
     href   = button.attr('href') or button.data('href')
     isNotAjax = (href[0] is '#')
-
+    teardown = teardown or false
 
     if isNotAjax #then we do setup/teardown every time
-      if button.data('popup') is 'initialized'
+      if teardown or button.data('popup') is 'initialized'
         button.data('popup', '')
         popup.data('position-object').disable()
         popup.hide()
@@ -43,12 +43,12 @@
         if closesOnExternalClick
           $('body').one 'click', (e) ->
             if popup.find($(e.target)).length is 0
-              togglePopup(popup, button)
+              togglePopup(popup, button, true)
 
         #do this one always
         $('body').one 'keydown', (e) ->
           if e.keyCode is 27 #code for escape
-            togglePopup(popup, button)
+            togglePopup(popup, button, true)
 
         button.data('popup', 'initialized')
         button.positionRelative(popup)
@@ -59,9 +59,9 @@
               .find(closesOnClickSelector)
               .one 'click', (e) ->
                 e.preventDefault()
-                togglePopup(popup, button)
+                togglePopup(popup, button, true)
           else
-            popup.one 'click', -> togglePopup(popup, button)
+            popup.one 'click', -> togglePopup(popup, button, true)
         popup.show();
 
 
