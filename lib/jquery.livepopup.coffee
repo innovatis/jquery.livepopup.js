@@ -60,7 +60,7 @@
 
   actsAsPopup = (e) ->
     e.preventDefault()
-    button    = $(e.target)
+    button    = $(this)
     href      = button.attr('href') or button.data('href')
     element   = button.data('popupElement')
     isAjax    = (href[0] isnt '#')
