@@ -28,35 +28,72 @@
     closesOnClick = popup.is('[data-close-on-click]')                  or button.is('[data-close-on-click]')
     closesOnClickSelector = popup.data('closeOnClick')                 or button.data('closeOnClick')
     closesOnExternalClick = popup.is('[data-close-on-external-click]') or button.is('[data-close-on-external-click]')
+    href   = button.attr('href') or button.data('href')
+    isNotAjax = (href[0] is '#')
+
+
+    if isNotAjax #then we do setup/teardown every time
+      if button.data('popup') is 'initialized'
+        button.data('popup', '')
+        #popup.disablePositionining() #somehow
+        popup.hide();
+
+      else #if popup is not initialized
+        #these ones need to get rebound every time
+        if closesOnExternalClick
+          $('body').one 'click', (e) ->
+            if popup.find($(e.target)).length is 0
+              togglePopup(popup, button)
+
+        #do this one always
+        $('body').one 'keydown', (e) ->
+          if e.keyCode is 27 #code for escape
+            togglePopup(popup, button)
+
+        button.data('popup', 'initialized')
+        button.positionRelative(popup)
+
+        if closesOnClick
+          if closesOnClickSelector
+            popup
+              .find(closesOnClickSelector)
+              .one 'click', (e) ->
+                e.preventDefault()
+                togglePopup(popup, button)
+          else
+            popup.one 'click', -> togglePopup(popup, button)
+        popup.show();
 
 
 
-    #these ones need to get rebound every time
-    if closesOnExternalClick
-      $('body').one 'click', (e) ->
-        if popup.find($(e.target)).length is 0
+    else #handle the ajax popup just the same as we always did
+
+      #these ones need to get rebound every time
+      if closesOnExternalClick
+        $('body').one 'click', (e) ->
+          if popup.find($(e.target)).length is 0
+            popup.hide()
+
+      #do this one always
+      $('body').one 'keydown', (e) ->
+        if e.keyCode is 27 #code for escape
           popup.hide()
 
-    #do this one always
-    $('body').one 'keydown', (e) ->
-      if e.keyCode is 27 #code for escape
-        popup.hide()
+      if button.data('popup') isnt 'initialized'
+        button.data('popup', 'initialized')
 
-    if  button.data('popup') isnt 'initialized'
-      button.data('popup', 'initialized')
+        button.exoPositionRelative(popup)
 
-      button.exoPositionRelative(popup)
-
-      if closesOnClick
-        if closesOnClickSelector
-          popup
-            .find(closesOnClickSelector)
-            .click (e) ->
-              e.preventDefault()
-              popup.toggle()
-        else
-          popup.click -> popup.toggle()
-    popup.toggle()
+        if closesOnClick
+          if closesOnClickSelector
+            popup
+              .find(closesOnClickSelector)
+              .click (e) ->
+                e.preventDefault()
+                popup.toggle()
+          else
+            popup.click -> popup.toggle()
+      popup.toggle()
 
   actsAsPopup = (e) ->
     e.preventDefault()
