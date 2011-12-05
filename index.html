@@ -23,8 +23,14 @@
       <a data-close-on-click data-popup-top="20" data-popup-trigger href="#exo-popup3">Params on trigger</a>
       <a data-close-on-click data-popup-top="20" data-popup-trigger href="/popup2.html">Auto-wrap</a>
 
+
+
+
       <a data-wrapper-class="foo" data-close-on-click data-popup-top="20" data-popup-trigger href="/popup2.html">Should give wrapper class "foo"</a>
       <a data-popup-trigger href="/not_a_real_file.html">Should fail</a>
+
+      <a data-popup-trigger href="#exo-popup4" data-close-on-external-click>Should close on external click</a>
+
     </div>
 
     <div data-close-on-click class= "exo-popup" id="exo-popup" data-popup-top="20">
@@ -46,6 +52,15 @@
       </div>
     </div>
     <div  class="exo-popup" id="exo-popup3">
+      <div class="exo-popup-header">
+      </div>
+      <div class="exo-popup-body">
+        <h1> Hi How Are You</h1>
+      </div>
+      <div class="exo-popup-footer">
+      </div>
+    </div>
+    <div  class="exo-popup" id="exo-popup4">
       <div class="exo-popup-header">
       </div>
       <div class="exo-popup-body">
